@@ -1,0 +1,69 @@
+# Book&Play - Git Attributes
+
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force LF line endings for text files
+*.php text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Force CRLF line endings for Windows batch files
+*.bat text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.otf binary
+
+# Archive files
+*.zip binary
+*.tar binary
+*.gz binary
+*.rar binary
+*.7z binary
+
+# Database files
+*.sql text eol=lf
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+
+# Log files
+*.log text eol=lf
+
+# Configuration files
+*.ini text eol=lf
+*.conf text eol=lf
+*.config text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.rst text eol=lf
+*.txt text eol=lf
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.ps1 text eol=crlf
+
+# Ignore files that should not be tracked
+*.tmp -text
+*.temp -text
+*.cache -text
+*.log -text
