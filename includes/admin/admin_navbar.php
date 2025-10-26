@@ -62,7 +62,7 @@
         <li><a class="dropdown-item" href="index.php?page=profile"><i class="bi bi-person me-2"></i>Profile</a></li>
         <li><a class="dropdown-item" href="index.php?page=settings"><i class="bi bi-gear me-2"></i>Settings</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+        <li><a class="dropdown-item text-danger" href="/BOOK-PLAY/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
       </ul>
     </div>
   </div>
