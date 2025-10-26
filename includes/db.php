@@ -1,26 +1,33 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+// includes/Database.php
 
-function getConnection() {
-    static $conn = null;
+class Database {
+    private static $instance = null;
+    private $conn;
     
-    if ($conn === null) {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/..");
-        $dotenv->load();
-
+    private function __construct() {
         try {
-            $conn = new PDO(
-                'mysql:host='.$_ENV["DB_HOST"].';port='.$_ENV["DB_PORT"].';dbname='.$_ENV["DB_NAME"].';charset=utf8',
-                $_ENV["DB_USER"],
-                $_ENV["DB_PASSWORD"]
+            $this->conn = new PDO(
+                'mysql:host=localhost;port=3306;dbname=reservation_terrains;charset=utf8',
+                'root',
+                ''
             );
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             die('Erreur de connexion : ' . $e->getMessage());
         }
     }
     
-    return $conn;
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+    
+    public function getConnection() {
+        return $this->conn;
+    }
 }
 ?>

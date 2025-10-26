@@ -3,9 +3,8 @@
   <div class="sidebar-header">
     <a class="sidebar-brand d-flex align-items-center gap-2" href="index.php">
       <div class="brand-icon">
-        <i class="bi bi-circle-fill"></i>
+        <img src="assets/logo.png" alt="Logo" class="brand-logo">
       </div>
-      <span class="brand-text">Book<span class="text-dark">&</span>Play</span>
     </a>
   </div>
 
@@ -102,9 +101,11 @@
 
 /* Sidebar Header */
 .sidebar-header {
-  padding: 1.5rem 1.25rem;
+  padding: 1rem;
   border-bottom: 1px solid rgba(40, 167, 69, 0.1);
   background: rgba(40, 167, 69, 0.05);
+  display: flex;
+  justify-content: center;
 }
 
 .sidebar-brand {
@@ -121,20 +122,22 @@
 }
 
 .brand-icon {
-  width: 32px;
-  height: 32px;
+  width: 120px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #28a745, #2ecc71);
-  border-radius: 50%;
-  color: white;
-  font-size: 1.2rem;
   transition: transform 0.3s ease;
 }
 
+.brand-logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .sidebar-brand:hover .brand-icon {
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .brand-text {
