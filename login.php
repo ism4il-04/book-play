@@ -85,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         body::before {
@@ -108,11 +108,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 20px;
             padding: 2.5rem 3rem;
             width: 100%;
-            max-width: 480px;
+            max-width: 600px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             position: relative;
             z-index: 1;
             border: 1px solid rgba(200, 255, 0, 0.2);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            width: 400px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
         }
 
         .form-title {
@@ -276,6 +287,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="form-container">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Book&Play Logo">
+        </div>
+        
         <h1 class="form-title">
             <i class="bi bi-box-arrow-in-right"></i>
             Connexion

@@ -8,6 +8,21 @@ $errors = [];
 $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+
+        // Vérification reCAPTCHA
+    if (!empty($recaptchaResponse)) {
+        $response = @file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaResponse");
+        if ($response !== false) {
+            $responseData = json_decode($response);
+            if (!$responseData->success) {
+                $error = "Captcha invalide! Veuillez réessayer.";
+            }
+        }
+    } else {
+        $error = "Veuillez cocher le captcha.";
+    }
+
     if (!AuthMiddleware::verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $errors[] = "Formulaire invalide.";
     } else {
@@ -41,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - Book & Play</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         * {
             margin: 0;
@@ -55,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         body::before {
@@ -78,11 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 20px;
             padding: 2.5rem 3rem;
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             position: relative;
             z-index: 1;
             border: 1px solid rgba(200, 255, 0, 0.2);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            width: 400px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
         }
 
         .form-title {
@@ -275,10 +302,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 flex-direction: column;
             }
         }
+
+        .recaptcha-wrapper {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="Book&Play Logo">
+        </div>
+        
         <h1 class="form-title">
             <i class="bi bi-person-plus-fill"></i>
             Inscription
@@ -352,6 +389,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="password" id="confirm_password" name="confirm_password" required>
                         </div>
                     </div>
+                </div>
+                <div class="recaptcha-wrapper">
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
                 </div>
 
                 <?php AuthMiddleware::csrfField(); ?>
